@@ -1,0 +1,16 @@
+{
+  "library": {
+    "name": "test-2",
+    "components": ["./src/**/*.webflow.@(js|jsx|mjs|ts|tsx)"],
+    "globals": "./src/globals.ts",
+    "description": "test-2",
+    "id": "test-2"
+  },
+  "telemetry": {
+    "global": {
+      "allowTelemetry": true,
+      "lastPrompted": 1776900246821,
+      "version": "1.15.0"
+    }
+  }
+}
