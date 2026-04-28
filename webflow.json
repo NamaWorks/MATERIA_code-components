@@ -1,10 +1,10 @@
 {
   "library": {
-    "name": "test-2",
+    "name": "Materia_code-components",
     "components": ["./src/**/*.webflow.@(js|jsx|mjs|ts|tsx)"],
     "globals": "./src/globals.ts",
-    "description": "test-2",
-    "id": "test-2"
+    "description": "Code components for Materia",
+    "id": "materia-code-components"
   },
   "telemetry": {
     "global": {
