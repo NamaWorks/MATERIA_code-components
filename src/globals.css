@@ -1,1 +1,6 @@
 @import 'tailwindcss';
+
+:root {
+  --anim-duration: 300ms;
+  --anim-ease: ease-in-out;
+}
