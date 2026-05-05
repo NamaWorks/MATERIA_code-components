@@ -8,8 +8,8 @@ export interface DropdownItemProps {
   description?: string;
 }
 
-const MOCK_DESCRIPTION =
-  'Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary. Each element is selected for its tactile quality and visual depth.';
+const mockDescription =
+  '<p>Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary. Each element is selected for its tactile quality and visual depth.</p>';
 
 const ArrowDownCircle = ({ isOpen }: { isOpen: boolean }) => (
   <svg
@@ -36,7 +36,7 @@ const ArrowDownCircle = ({ isOpen }: { isOpen: boolean }) => (
 export const DropdownItem = ({
   index,
   label,
-  description = MOCK_DESCRIPTION,
+  description = mockDescription,
 }: DropdownItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,25 +45,32 @@ export const DropdownItem = ({
       <div
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
-        className="flex items-end justify-between w-full pb-[10px] cursor-pointer"
+        className="grid grid-cols-[auto_1fr_auto] items-end gap-x-5 pb-[10px] cursor-pointer"
       >
-        <div className="flex items-baseline gap-x-5">
-          <span className="font-['Helvetica_Neue'] text-[12px] font-normal uppercase leading-[0.9] text-[#0e0e0e]">
-            {index}
-          </span>
-          <span className="font-['Helvetica_Neue'] text-[16px] font-normal uppercase leading-[0.9] text-[#0e0e0e]">
-            {label}
-          </span>
-        </div>
+        <span className="font-['Helvetica_Neue'] text-[12px] font-normal uppercase leading-[0.9] text-[#0e0e0e]">
+          {index}
+        </span>
+        <span className="font-['Helvetica_Neue'] text-[16px] font-normal uppercase leading-[0.9] text-[#0e0e0e]">
+          {label}
+        </span>
         <ArrowDownCircle isOpen={isOpen} />
       </div>
-      <div
-        className={`grid transition-[grid-template-rows] duration-[var(--anim-duration)] ease-[var(--anim-ease)] ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
-      >
-        <div className="overflow-hidden">
-          <p className="font-['Helvetica_Neue'] text-[14px] font-normal leading-[1.4] text-[#0e0e0e] pt-[10px] pb-[10px]">
-            {description}
-          </p>
+      <div className="grid grid-cols-[auto_1fr] gap-x-5">
+        <span
+          aria-hidden="true"
+          className="font-['Helvetica_Neue'] text-[12px] invisible select-none"
+        >
+          {index}
+        </span>
+        <div
+          className={`grid transition-[grid-template-rows] duration-[var(--anim-duration)] ease-[var(--anim-ease)] ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+        >
+          <div className="overflow-hidden">
+            <div
+              dangerouslySetInnerHTML={{ __html: description }}
+              className="font-['Helvetica_Neue'] text-[14px] font-normal leading-[1.4] text-[#0e0e0e] pt-[10px] pb-[10px]"
+            />
+          </div>
         </div>
       </div>
     </div>
