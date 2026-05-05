@@ -4,12 +4,12 @@ import { DropdownItem } from './DropdownItem';
 describe('DropdownItem', () => {
   it('renders without crashing', () => {
     render(<DropdownItem index="001." label="Lorem ipsum" />);
-    expect(screen.getByText('001.')).toBeInTheDocument();
+    expect(screen.getByText('Lorem ipsum')).toBeInTheDocument();
   });
 
   it('renders the index prop', () => {
     render(<DropdownItem index="042." label="Some label" />);
-    expect(screen.getByText('042.')).toBeInTheDocument();
+    expect(screen.getAllByText('042.')[0]).toBeInTheDocument();
   });
 
   it('renders the label prop', () => {

@@ -22,10 +22,10 @@ export default declareComponent(DropdownItem, {
       name: 'Label',
       defaultValue: 'Lorem ipsum dolor sit',
     }),
-    description: props.Text({
+    description: props.RichText({
       name: 'Description',
       defaultValue:
-        'Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary.',
+        '<p>Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary.</p>',
     }),
   },
 });
