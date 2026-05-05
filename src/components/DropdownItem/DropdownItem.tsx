@@ -68,7 +68,7 @@ export const DropdownItem = ({
           <div className="overflow-hidden">
             <div
               dangerouslySetInnerHTML={{ __html: description }}
-              className="font-['Helvetica_Neue'] text-[14px] font-normal leading-[1.4] text-[#0e0e0e] pt-[10px] pb-[10px]"
+              className="font-['Helvetica_Neue'] text-[14px] font-normal leading-[1.4] text-[#0e0e0e] pt-[10px] pb-[10px] [&_p]:mb-[0.75em] [&_p:last-child]:mb-0"
             />
           </div>
         </div>
