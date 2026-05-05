@@ -25,7 +25,7 @@ export default declareComponent(DropdownItem, {
     description: props.RichText({
       name: 'Description',
       defaultValue:
-        '<p>Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary.</p>',
+        'Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary.',
     }),
   },
 });
