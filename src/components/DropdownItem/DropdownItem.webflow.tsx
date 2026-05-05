@@ -22,6 +22,6 @@ export default declareComponent(DropdownItem, {
       name: 'Label',
       defaultValue: 'Lorem ipsum dolor sit',
     }),
-    description: props.Slot(),
+    description: props.Slot({ name: 'Description' }),
   },
 });

@@ -51,10 +51,10 @@ export const DropdownItem = ({
         aria-expanded={isOpen}
         className="grid grid-cols-[auto_1fr_auto] items-end gap-x-5 pb-[10px] cursor-pointer"
       >
-        <span className="font-['Helvetica_Neue'] text-[12px] font-normal uppercase leading-[0.9] text-[#0e0e0e]">
+        <span className="font-['Helvetica_Neue'] text-[12px] font-normal uppercase leading-[1.2] text-[#0e0e0e]">
           {index}
         </span>
-        <span className="font-['Helvetica_Neue'] text-[16px] font-normal uppercase leading-[0.9] text-[#0e0e0e]">
+        <span className="font-['Helvetica_Neue'] text-[16px] font-normal uppercase leading-[1.2] text-[#0e0e0e]">
           {label}
         </span>
         <ArrowDownCircle isOpen={isOpen} />
@@ -70,7 +70,7 @@ export const DropdownItem = ({
           className={`grid transition-[grid-template-rows] duration-[var(--anim-duration)] ease-[var(--anim-ease)] ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
         >
           <div className="overflow-hidden">
-            <div className="font-['Helvetica_Neue'] text-[14px] font-normal leading-[1.4] text-[#0e0e0e] pt-[10px] pb-[10px] [&_p]:mb-[0.75em] [&_p:last-child]:mb-0">
+            <div className="font-['Helvetica_Neue'] text-[16px] font-normal leading-[1.2] text-[#0e0e0e] pt-[10px] pb-[10px] [&_p]:mb-[0.75em] [&_p:last-child]:mb-0 normal-case">
               {description}
             </div>
           </div>
