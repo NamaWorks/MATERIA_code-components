@@ -1,15 +1,19 @@
 // Item of a dropdown group with its animations already integrated and to be used in coordination with the Webflow CMS data
 
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 
 export interface DropdownItemProps {
   index: string;
   label: string;
-  description?: string;
+  description?: ReactNode;
 }
 
-const mockDescription =
-  '<p>Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary. Each element is selected for its tactile quality and visual depth.</p>';
+const mockDescription = (
+  <p>
+    Natural materials and refined craftsmanship come together to create spaces that are both
+    timeless and contemporary. Each element is selected for its tactile quality and visual depth.
+  </p>
+);
 
 const ArrowDownCircle = ({ isOpen }: { isOpen: boolean }) => (
   <svg
@@ -66,10 +70,9 @@ export const DropdownItem = ({
           className={`grid transition-[grid-template-rows] duration-[var(--anim-duration)] ease-[var(--anim-ease)] ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
         >
           <div className="overflow-hidden">
-            <div
-              dangerouslySetInnerHTML={{ __html: description }}
-              className="font-['Helvetica_Neue'] text-[14px] font-normal leading-[1.4] text-[#0e0e0e] pt-[10px] pb-[10px] [&_p]:mb-[0.75em] [&_p:last-child]:mb-0"
-            />
+            <div className="font-['Helvetica_Neue'] text-[14px] font-normal leading-[1.4] text-[#0e0e0e] pt-[10px] pb-[10px] [&_p]:mb-[0.75em] [&_p:last-child]:mb-0">
+              {description}
+            </div>
           </div>
         </div>
       </div>

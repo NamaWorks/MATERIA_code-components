@@ -7,6 +7,9 @@ import { DropdownItem } from './DropdownItem';
 const meta: Meta<typeof DropdownItem> = {
   title: 'Components/DropdownItem',
   component: DropdownItem,
+  argTypes: {
+    description: { control: 'text' },
+  },
 };
 
 export default meta;
@@ -16,6 +19,8 @@ export const Default: Story = {
   args: {
     index: '001.',
     label: 'Lorem ipsum dolor sit',
+    description:
+      'Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary. Each element is selected for its tactile quality and visual depth.',
   },
 };
 
@@ -24,7 +29,7 @@ export const WithDescription: Story = {
     index: '002.',
     label: 'Craftsmanship & materials',
     description:
-      'Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary. Each element is selected for its tactile quality and visual depth.',
+      'Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary. \n\nEach element is selected for its tactile quality and visual depth.',
   },
 };
 
@@ -32,5 +37,7 @@ export const LongLabel: Story = {
   args: {
     index: '003.',
     label: 'A longer label to see how the row handles wider text',
+    description:
+      'Natural materials and refined craftsmanship come together to create spaces that are both timeless and contemporary.',
   },
 };
