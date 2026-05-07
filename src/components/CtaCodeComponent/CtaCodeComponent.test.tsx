@@ -1,15 +1,25 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { CtaCodeComponent } from './CtaCodeComponent';
 
 describe('CtaCodeComponent', () => {
   it('renders without crashing', () => {
-    render(<CtaCodeComponent />);
-    expect(screen.getByText('Contacta ahora')).toBeInTheDocument();
+    const { container } = render(<CtaCodeComponent />);
+    const chars = container.querySelectorAll('.char-top');
+    const text = Array.from(chars)
+      .map((s) => s.textContent)
+      .join('')
+      .replace(/\u00A0/g, ' ');
+    expect(text).toBe('Contacta ahora');
   });
 
   it('renders the title prop', () => {
-    render(<CtaCodeComponent title="Pide cita ahora" />);
-    expect(screen.getByText('Pide cita ahora')).toBeInTheDocument();
+    const { container } = render(<CtaCodeComponent title="Pide cita ahora" />);
+    const chars = container.querySelectorAll('.char-top');
+    const text = Array.from(chars)
+      .map((s) => s.textContent)
+      .join('')
+      .replace(/\u00A0/g, ' ');
+    expect(text).toBe('Pide cita ahora');
   });
 
   it('renders with default black variant when no variant is provided', () => {
@@ -35,22 +45,13 @@ describe('CtaCodeComponent', () => {
     expect(container.querySelector('svg')).toBeInTheDocument();
   });
 
-  it('arrow container is hidden by default via opacity-0', () => {
-    const { container } = render(<CtaCodeComponent title="Test" />);
-    const arrowBox = container.querySelector('.opacity-0');
-    expect(arrowBox).toBeInTheDocument();
-  });
-
-  it('arrow container starts offset to the right via translate-x-2', () => {
-    const { container } = render(<CtaCodeComponent title="Test" />);
-    const arrowBox = container.querySelector('.translate-x-2');
-    expect(arrowBox).toBeInTheDocument();
-  });
-
-  it('svg paths have trim-path classes applied', () => {
-    const { container } = render(<CtaCodeComponent title="Test" />);
-    const paths = container.querySelectorAll('.cta-arrow-path');
-    expect(paths.length).toBe(2);
+  it('renders both char-top and char-bottom layers with matching character count', () => {
+    const title = 'Test';
+    const { container } = render(<CtaCodeComponent title={title} />);
+    const charsTop = container.querySelectorAll('.char-top');
+    const charsBottom = container.querySelectorAll('.char-bottom');
+    expect(charsTop.length).toBe(title.length);
+    expect(charsBottom.length).toBe(title.length);
   });
 
   it('renders text in uppercase via CSS class', () => {
