@@ -7,7 +7,8 @@ import { Carousel } from './Carousel';
 
 export default declareComponent(Carousel, {
   name: 'Carousel',
-  description: 'Carousel to be used on galleries that will autoplay and carousel of logos or similar',
+  description:
+    'Carousel to be used on galleries that will autoplay and carousel of logos or similar',
   group: 'Components',
   options: {
     ssr: true,

@@ -9,7 +9,7 @@ const meta: Meta<typeof Carousel> = {
   component: Carousel,
   args: {
     arrows: false,
-    speed: .5
+    speed: 0.5,
   },
 };
 
