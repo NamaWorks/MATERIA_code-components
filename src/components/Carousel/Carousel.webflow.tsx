@@ -1,7 +1,7 @@
 // Carousel to be used on galleries that will autoplay and carousel of logos or similar
 // Prop types reference: https://developers.webflow.com/code-components/reference/prop-types
 
-import { declareComponent, slots } from '@webflow/react';
+import { declareComponent } from '@webflow/react';
 import { props } from '@webflow/data-types';
 import { Carousel } from './Carousel';
 
@@ -22,8 +22,6 @@ export default declareComponent(Carousel, {
       name: 'Speed',
       defaultValue: 1,
     }),
-  },
-  slots: {
-    children: slots.Children(),
+    children: props.Slot({ name: 'Children' }),
   },
 });
