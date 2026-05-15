@@ -56,12 +56,12 @@ export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: Men
     navEl.addEventListener('mouseleave', handleMouseLeave);
 
     const panels = navEl.querySelectorAll('[data-dropdown-panel]');
-    panels.forEach(p => p.addEventListener('mouseenter', handlePanelMouseEnter));
+    panels.forEach((p) => p.addEventListener('mouseenter', handlePanelMouseEnter));
 
     return () => {
       navLinksEl.removeEventListener('mouseover', handleMouseOver);
       navEl.removeEventListener('mouseleave', handleMouseLeave);
-      panels.forEach(p => p.removeEventListener('mouseenter', handlePanelMouseEnter));
+      panels.forEach((p) => p.removeEventListener('mouseenter', handlePanelMouseEnter));
       clearTimeout(closeTimerRef.current);
       clearTimeout(switchTimerRef.current);
     };
@@ -79,7 +79,6 @@ export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: Men
 
       {/* Dropdown panels — absolute, overlays page content below the navbar bar */}
       <div className="absolute top-full left-0 w-full">
-
         {/* Proyectos panel — wrapper animates height using scrollHeight of its content */}
         <div
           ref={proyectasWrapperRef}
@@ -87,9 +86,10 @@ export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: Men
           data-open={openDropdown === 'projects' ? '' : undefined}
           style={{
             overflow: 'hidden',
-            height: openDropdown === 'projects'
-              ? `${proyectasWrapperRef.current?.scrollHeight ?? 0}px`
-              : '0px',
+            height:
+              openDropdown === 'projects'
+                ? `${proyectasWrapperRef.current?.scrollHeight ?? 0}px`
+                : '0px',
             transition: 'height 300ms ease-in-out',
           }}
         >
@@ -105,9 +105,10 @@ export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: Men
           data-open={openDropdown === 'products' ? '' : undefined}
           style={{
             overflow: 'hidden',
-            height: openDropdown === 'products'
-              ? `${productosWrapperRef.current?.scrollHeight ?? 0}px`
-              : '0px',
+            height:
+              openDropdown === 'products'
+                ? `${productosWrapperRef.current?.scrollHeight ?? 0}px`
+                : '0px',
             transition: 'height 300ms ease-in-out',
           }}
         >
@@ -115,7 +116,6 @@ export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: Men
             {productosContent}
           </div>
         </div>
-
       </div>
     </nav>
   );

@@ -4,8 +4,12 @@ import { Menu } from './Menu';
 const mockNavLinks = (
   <>
     <a href="#nosotros">NOSOTROS</a>
-    <a href="#proyectos" {...{'dropdown-data': 'projects'}}>PROYECTOS</a>
-    <a href="#productos" {...{'dropdown-data': 'products'}}>PRODUCTOS</a>
+    <a href="#proyectos" {...{ 'dropdown-data': 'projects' }}>
+      PROYECTOS
+    </a>
+    <a href="#productos" {...{ 'dropdown-data': 'products' }}>
+      PRODUCTOS
+    </a>
     <a href="#contacto">CONTACTO</a>
   </>
 );
