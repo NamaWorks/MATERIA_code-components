@@ -12,12 +12,14 @@
 //    Drag any Webflow element (image, link block, div) into that slot to set
 //    the navbar logo. The slot renders on the left side of the nav bar.
 //
-// 3. NAV ITEMS (CMS binding — pending)
-//    navItems are not yet exposed as a Webflow prop. They will be bound to a
-//    CMS Collection once the CMS integration is implemented. For now, pass
-//    them programmatically or hardcode them in Menu.tsx for preview purposes.
-//    Expected shape per item:
-//      { name, slug, link, submenu?: 'products' | 'projects' | 'none' | null }
+// 3. NAV LINKS SLOT (Collection List)
+//    Drag a Collection List into the "Nav Links" slot. On each Collection Item
+//    add a custom attribute named "dropdown-data" and bind it to a CMS Option field:
+//      "projects" / "Projects"  → opens the Proyectos dropdown on hover
+//      "products" / "Products"  → opens the Productos dropdown on hover
+//      (absent)                 → no dropdown (regular link)
+//    Values are case-insensitive. The component uses native DOM listeners so
+//    it works reliably with Webflow-rendered slot content.
 //
 // 4. ANIMATION CSS VARIABLES
 //    The component reads two CSS variables for transitions. Set these on the
@@ -44,5 +46,8 @@ export default declareComponent(Menu, {
   },
   props: {
     logo: props.Slot({ name: 'Logo' }),
+    navLinks: props.Slot({ name: 'Nav Links' }),
+    proyectosContent: props.Slot({ name: 'Proyectos Content' }),
+    productosContent: props.Slot({ name: 'Productos Content' }),
   },
 });

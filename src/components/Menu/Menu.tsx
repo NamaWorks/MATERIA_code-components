@@ -1,91 +1,121 @@
 import { useState, useRef, useEffect, ReactNode } from 'react';
 
-// submenu: 'products' | 'projects' opens the matching dropdown panel; 'none' or null = no dropdown
-export interface NavItem {
-  name: string;
-  slug: string;
-  link: string;
-  submenu?: 'products' | 'projects' | 'none' | null;
-}
-
 export interface MenuProps {
   logo?: ReactNode;
-  navItems?: NavItem[];
+  navLinks?: ReactNode;
+  proyectosContent?: ReactNode;
+  productosContent?: ReactNode;
 }
 
-const DropdownIndicator = ({ active }: { active: boolean }) => (
-  <svg
-    width="11"
-    height="11"
-    viewBox="0 0 11 11"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <rect width="11" height="11" rx="1.30299" fill={active ? '#0E0E0E' : '#F9F8F5'} />
-    <circle cx="5.50152" cy="5.49957" r="2.18511" fill={active ? '#F9F8F5' : '#0E0E0E'} />
-  </svg>
-);
-
-export const Menu = ({ logo, navItems = [] }: MenuProps) => {
+export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: MenuProps) => {
   const [openDropdown, setOpenDropdown] = useState<'products' | 'projects' | null>(null);
+  const openRef = useRef<'products' | 'projects' | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout>>();
-
-  const scheduleClose = () => {
-    closeTimerRef.current = setTimeout(() => setOpenDropdown(null), 150);
-  };
-
-  const cancelClose = () => {
-    clearTimeout(closeTimerRef.current);
-  };
+  const switchTimerRef = useRef<ReturnType<typeof setTimeout>>();
+  const navLinksRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const proyectasWrapperRef = useRef<HTMLDivElement>(null);
+  const productosWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    return () => clearTimeout(closeTimerRef.current);
+    const navLinksEl = navLinksRef.current;
+    const navEl = navRef.current;
+    if (!navLinksEl || !navEl) return;
+
+    const open = (val: 'products' | 'projects' | null) => {
+      openRef.current = val;
+      setOpenDropdown(val);
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      clearTimeout(closeTimerRef.current);
+      clearTimeout(switchTimerRef.current);
+      const navItem = (e.target as HTMLElement).closest?.('[dropdown-data]');
+      const submenu = navItem?.getAttribute('dropdown-data')?.toLowerCase() ?? null;
+      const next = submenu === 'products' || submenu === 'projects' ? submenu : null;
+
+      if (next && openRef.current && openRef.current !== next) {
+        open(null);
+        switchTimerRef.current = setTimeout(() => open(next), 300);
+      } else {
+        open(next);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      clearTimeout(switchTimerRef.current);
+      closeTimerRef.current = setTimeout(() => open(null), 150);
+    };
+
+    const handlePanelMouseEnter = () => {
+      clearTimeout(closeTimerRef.current);
+      clearTimeout(switchTimerRef.current);
+    };
+
+    navLinksEl.addEventListener('mouseover', handleMouseOver);
+    navEl.addEventListener('mouseleave', handleMouseLeave);
+
+    const panels = navEl.querySelectorAll('[data-dropdown-panel]');
+    panels.forEach(p => p.addEventListener('mouseenter', handlePanelMouseEnter));
+
+    return () => {
+      navLinksEl.removeEventListener('mouseover', handleMouseOver);
+      navEl.removeEventListener('mouseleave', handleMouseLeave);
+      panels.forEach(p => p.removeEventListener('mouseenter', handlePanelMouseEnter));
+      clearTimeout(closeTimerRef.current);
+      clearTimeout(switchTimerRef.current);
+    };
   }, []);
 
   return (
-    <nav className="w-full z-50" onMouseLeave={scheduleClose}>
-      {/* Navbar */}
+    <nav ref={navRef} className="absolute top-0 left-0 w-full z-50">
+      {/* Navbar bar */}
       <div className="w-full bg-[#3d3d3d] flex items-center justify-between px-[10px] pt-[8px] pb-[6px]">
-        {/* Logo slot */}
-        <div onMouseEnter={cancelClose}>{logo}</div>
-
-        {/* Nav links */}
-        <div className="flex items-center gap-[60px]" onMouseEnter={cancelClose}>
-          {navItems.map((item) => {
-            const hasSubmenu = item.submenu && item.submenu !== 'none';
-            const isActive = openDropdown === item.submenu;
-
-            return (
-              <a
-                key={item.slug}
-                href={item.link}
-                className="flex items-center gap-[5px] font-['Helvetica_Neue'] text-[12px] font-normal text-white uppercase tracking-normal transition-opacity duration-[var(--anim-duration)] ease-[var(--anim-ease)] hover:opacity-60"
-                onMouseEnter={() => {
-                  cancelClose();
-                  setOpenDropdown(hasSubmenu ? (item.submenu as 'products' | 'projects') : null);
-                }}
-              >
-                {item.slug}
-                {hasSubmenu && <DropdownIndicator active={isActive} />}
-              </a>
-            );
-          })}
+        <div>{logo}</div>
+        <div ref={navLinksRef} className="flex items-center gap-[60px]">
+          {navLinks}
         </div>
       </div>
 
-      {/* Dropdown panel */}
-      <div
-        className={`grid transition-[grid-template-rows] duration-[var(--anim-duration)] ease-[var(--anim-ease)] ${
-          openDropdown ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-        }`}
-        onMouseEnter={cancelClose}
-      >
-        <div className="overflow-hidden">
-          <div className="w-full bg-black/90 backdrop-blur-[10px]">
-            {/* Projects and products submenus will be added here */}
+      {/* Dropdown panels — absolute, overlays page content below the navbar bar */}
+      <div className="absolute top-full left-0 w-full">
+
+        {/* Proyectos panel — wrapper animates height using scrollHeight of its content */}
+        <div
+          ref={proyectasWrapperRef}
+          data-dropdown-panel
+          data-open={openDropdown === 'projects' ? '' : undefined}
+          style={{
+            overflow: 'hidden',
+            height: openDropdown === 'projects'
+              ? `${proyectasWrapperRef.current?.scrollHeight ?? 0}px`
+              : '0px',
+            transition: 'height 300ms ease-in-out',
+          }}
+        >
+          <div className="w-full bg-[#3d3d3d]/70 backdrop-blur-[10px] mt-[10px]">
+            {proyectosContent}
           </div>
         </div>
+
+        {/* Productos panel */}
+        <div
+          ref={productosWrapperRef}
+          data-dropdown-panel
+          data-open={openDropdown === 'products' ? '' : undefined}
+          style={{
+            overflow: 'hidden',
+            height: openDropdown === 'products'
+              ? `${productosWrapperRef.current?.scrollHeight ?? 0}px`
+              : '0px',
+            transition: 'height 300ms ease-in-out',
+          }}
+        >
+          <div className="w-full bg-[#3d3d3d]/70 backdrop-blur-[10px] mt-[10px] px-[10px] py-[30px]">
+            {productosContent}
+          </div>
+        </div>
+
       </div>
     </nav>
   );
