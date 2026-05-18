@@ -112,7 +112,7 @@ export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: Men
             transition: 'height 300ms ease-in-out',
           }}
         >
-          <div className="w-full bg-[#3d3d3d]/70 backdrop-blur-[10px] mt-[10px] px-[10px] py-[30px]">
+          <div className="w-full bg-[#3d3d3d]/0 backdrop-blur-[0px] mt-[10px] px-[10px] py-[30px]">
             {productosContent}
           </div>
         </div>
