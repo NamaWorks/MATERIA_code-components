@@ -47,6 +47,8 @@ export default declareComponent(Menu, {
   props: {
     logo: props.Slot({ name: 'Logo' }),
     navLinks: props.Slot({ name: 'Nav Links' }),
+    navColor: props.Text({ name: 'Nav Color', defaultValue: '#0e0e0e' }),
+    navOpacity: props.Number({ name: 'Nav Opacity', defaultValue: 90 }),
     proyectosContent: props.Slot({ name: 'Proyectos Content' }),
     productosContent: props.Slot({ name: 'Productos Content' }),
   },
