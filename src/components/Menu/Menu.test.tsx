@@ -48,6 +48,18 @@ describe('Menu', () => {
     expect(document.querySelector('[data-dropdown-panel][data-open]')).not.toBeInTheDocument();
   });
 
+  it('applies default navColor and navOpacity to navbar bar', () => {
+    const { container } = render(<Menu />);
+    const navBar = container.querySelector('nav > div');
+    expect(navBar?.className).toContain('bg-[#0e0e0e]/90');
+  });
+
+  it('applies custom navColor and navOpacity to navbar bar', () => {
+    const { container } = render(<Menu navColor="#ffffff" navOpacity={50} />);
+    const navBar = container.querySelector('nav > div');
+    expect(navBar?.className).toContain('bg-[#ffffff]/50');
+  });
+
   it('renders dropdown slot content inside the correct panel', () => {
     render(
       <Menu

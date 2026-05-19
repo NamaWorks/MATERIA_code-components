@@ -3,11 +3,20 @@ import { useState, useRef, useEffect, ReactNode } from 'react';
 export interface MenuProps {
   logo?: ReactNode;
   navLinks?: ReactNode;
+  navOpacity?: number;
+  navColor?: string;
   proyectosContent?: ReactNode;
   productosContent?: ReactNode;
 }
 
-export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: MenuProps) => {
+export const Menu = ({
+  logo,
+  navLinks,
+  navOpacity = 90,
+  navColor = '#0e0e0e',
+  proyectosContent,
+  productosContent,
+}: MenuProps) => {
   const [openDropdown, setOpenDropdown] = useState<'products' | 'projects' | null>(null);
   const openRef = useRef<'products' | 'projects' | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout>>();
@@ -70,7 +79,9 @@ export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: Men
   return (
     <nav ref={navRef} className="absolute top-0 left-0 w-full z-50">
       {/* Navbar bar */}
-      <div className="w-full bg-[#3d3d3d] flex items-center justify-between px-[10px] pt-[8px] pb-[6px]">
+      <div
+        className={`w-full bg-[${navColor}]/${navOpacity}  backdrop-blur-[10px] flex items-center justify-between px-[10px] pt-[8px] pb-[6px]`}
+      >
         <div>{logo}</div>
         <div ref={navLinksRef} className="flex items-center gap-[60px]">
           {navLinks}
@@ -93,7 +104,7 @@ export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: Men
             transition: 'height 300ms ease-in-out',
           }}
         >
-          <div className="w-full bg-[#3d3d3d]/70 backdrop-blur-[10px] mt-[10px]">
+          <div className="w-full bg-[#0e0e0eb3]/0 backdrop-blur-[0px] mt-[10px]">
             {proyectosContent}
           </div>
         </div>
@@ -112,7 +123,7 @@ export const Menu = ({ logo, navLinks, proyectosContent, productosContent }: Men
             transition: 'height 300ms ease-in-out',
           }}
         >
-          <div className="w-full bg-[#3d3d3d]/0 backdrop-blur-[0px] mt-[10px] px-[10px] py-[30px]">
+          <div className="w-full bg-[#0e0e0eb3]/0 backdrop-blur-[0px] mt-[10px] px-[10px] py-[30px]">
             {productosContent}
           </div>
         </div>
