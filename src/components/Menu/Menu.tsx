@@ -81,6 +81,7 @@ export const Menu = ({
       {/* Navbar bar */}
       <div
         className={`w-full bg-[${navColor}]/${navOpacity}  backdrop-blur-[10px] flex items-center justify-between px-[10px] pt-[8px] pb-[6px]`}
+        style={{backgroundColor: `${navColor}`, opacity: `${navOpacity/100}`}}
       >
         <div>{logo}</div>
         <div ref={navLinksRef} className="flex items-center gap-[60px]">
