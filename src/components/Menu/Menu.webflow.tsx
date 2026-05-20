@@ -15,11 +15,13 @@
 // 3. NAV LINKS SLOT (Collection List)
 //    Drag a Collection List into the "Nav Links" slot. On each Collection Item
 //    add a custom attribute named "dropdown-data" and bind it to a CMS Option field:
-//      "projects" / "Projects"  → opens the Proyectos dropdown on hover
-//      "products" / "Products"  → opens the Productos dropdown on hover
-//      (absent)                 → no dropdown (regular link)
+//      "projects" / "Projects"  → opens the Proyectos dropdown + shows indicator dot
+//      "products" / "Products"  → opens the Productos dropdown + shows indicator dot
+//      "none" or (absent)       → regular link, no dropdown, no indicator dot
 //    Values are case-insensitive. The component uses native DOM listeners so
 //    it works reliably with Webflow-rendered slot content.
+//    The indicator dot (11×11px square, animates filter on hover) is injected
+//    automatically — no extra setup needed.
 //
 // 4. ANIMATION CSS VARIABLES
 //    The component reads two CSS variables for transitions. Set these on the
