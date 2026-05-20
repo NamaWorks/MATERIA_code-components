@@ -22,7 +22,8 @@ import { NavbarLink } from './NavbarLink';
 
 export default declareComponent(NavbarLink, {
   name: 'NavbarLink',
-  description: 'Navbar link with an optional dropdown indicator dot. Sets dropdown-data on its parent Collection Item automatically.',
+  description:
+    'Navbar link with an optional dropdown indicator dot. Sets dropdown-data on its parent Collection Item automatically.',
   group: 'Components',
   options: {
     ssr: false,

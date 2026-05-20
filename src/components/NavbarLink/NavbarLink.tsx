@@ -17,7 +17,9 @@ export const NavbarLink = ({ label = 'LINK', href = '#', dropdownData }: NavbarL
     const parent = linkRef.current?.parentElement;
     if (!parent || !showIndicator || !dropdownData) return;
     parent.setAttribute('dropdown-data', dropdownData);
-    return () => { parent.removeAttribute('dropdown-data'); };
+    return () => {
+      parent.removeAttribute('dropdown-data');
+    };
   }, [showIndicator, dropdownData]);
 
   return (
