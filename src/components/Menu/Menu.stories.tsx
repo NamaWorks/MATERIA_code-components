@@ -46,11 +46,12 @@ const mockLogo = (
 );
 
 // ─── Mock nav links (simulates a Webflow Collection List) ─────────────────────
-// Items with dropdown-data trigger the matching panel on hover.
+// Items with dropdown-data (non-empty, non-"none") open the matching panel on hover
+// and automatically receive the indicator dot injected by Menu.
 // In Webflow this attribute is bound to a CMS Option field on the Collection Item.
 
 const navLinkStyle =
-  "font-['Helvetica_Neue'] text-[12px] font-normal text-white uppercase cursor-pointer hover:opacity-60 transition-opacity";
+  "font-['Helvetica_Neue'] text-[12px] font-normal text-white uppercase cursor-pointer";
 
 const mockNavLinks = (
   <>
