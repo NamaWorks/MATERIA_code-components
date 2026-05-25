@@ -26,7 +26,7 @@ export const NavbarLink = ({ label = 'LINK', href = '#', dropdownData }: NavbarL
     <a
       ref={linkRef}
       href={href}
-      className="flex items-center gap-[5px] font-['Helvetica_Neue'] text-[12px] font-normal text-white uppercase cursor-pointer"
+      className="flex items-center gap-[5px] font-['Helveticaneue'] text-[12px] font-normal text-white uppercase cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
