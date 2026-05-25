@@ -51,7 +51,7 @@ const mockLogo = (
 // In Webflow this attribute is bound to a CMS Option field on the Collection Item.
 
 const navLinkStyle =
-  "font-['Helvetica_Neue'] text-[12px] font-normal text-white uppercase cursor-pointer";
+  "font-['Helveticaneue'] text-[12px] font-normal text-white uppercase cursor-pointer";
 
 const mockNavLinks = (
   <>
@@ -89,13 +89,13 @@ const mockProyectosContent = (
     ].map(({ index, name }) => (
       <div key={index} className="flex flex-col gap-[8px]">
         <div className="w-[155px] h-[140px] bg-[#555]" />
-        <span className="font-['Helvetica_Neue'] text-[8px] text-[#F9F8F5]">{index}</span>
-        <span className="font-['Helvetica_Neue'] text-[16px] text-[#F9F8F5]">{name}</span>
+        <span className="font-['Helveticaneue'] text-[8px] text-[#F9F8F5]">{index}</span>
+        <span className="font-['Helveticaneue'] text-[16px] text-[#F9F8F5]">{name}</span>
       </div>
     ))}
     <div className="flex items-end ml-auto">
       <div className="bg-[#F9F8F5]/80 rounded-[1px] px-[8px] py-[6px]">
-        <span className="font-['Helvetica_Neue'] text-[9px] text-black uppercase">
+        <span className="font-['Helveticaneue'] text-[9px] text-black uppercase">
           VER TODOS LOS PROYECTOS
         </span>
       </div>
@@ -109,8 +109,8 @@ const ProductosItem = ({ title, items }: { title: string; items: string[] }) => 
   <div className="flex gap-[22px]">
     <div className="w-[11px] h-[11px] rounded-[1px] bg-[#F9F8F5] shrink-0 mt-[2px]" />
     <div className="flex flex-col gap-[13px]">
-      <span className="font-['Helvetica_Neue'] text-[20px] text-[#F9F8F5]">{title}</span>
-      <span className="font-['Helvetica_Neue'] text-[14px] text-[#F9F8F5] leading-[1.3]">
+      <span className="font-['Helveticaneue'] text-[20px] text-[#F9F8F5]">{title}</span>
+      <span className="font-['Helveticaneue'] text-[14px] text-[#F9F8F5] leading-[1.3]">
         {items.join(', ')}
       </span>
     </div>
@@ -219,7 +219,7 @@ export const PageDemo: Story = {
         {/* Page content below — verifies navbar overlays rather than pushes */}
         <img src="https://picsum.photos/seed/42/1400/800" alt="" className="w-full object-cover" />
         <div className="p-[40px] text-white">
-          <h1 className="text-[48px] font-['Helvetica_Neue'] mb-[20px]">
+          <h1 className="text-[48px] font-['Helveticaneue'] mb-[20px]">
             Page content below navbar
           </h1>
           <p className="text-[16px] opacity-60">
@@ -261,13 +261,13 @@ export const FullMenu: Story = {
               alt=""
               className="w-[155px] h-[140px] object-cover"
             />
-            <span className="font-['Helvetica_Neue'] text-[8px] text-[#F9F8F5]">00{n}.</span>
-            <span className="font-['Helvetica_Neue'] text-[16px] text-[#F9F8F5]">Proyecto {n}</span>
+            <span className="font-['Helveticaneue'] text-[8px] text-[#F9F8F5]">00{n}.</span>
+            <span className="font-['Helveticaneue'] text-[16px] text-[#F9F8F5]">Proyecto {n}</span>
           </div>
         ))}
         <div className="flex items-end ml-auto">
           <div className="bg-[#F9F8F5]/80 rounded-[1px] px-[8px] py-[6px]">
-            <span className="font-['Helvetica_Neue'] text-[9px] text-black uppercase">
+            <span className="font-['Helveticaneue'] text-[9px] text-black uppercase">
               VER TODOS LOS PROYECTOS
             </span>
           </div>
