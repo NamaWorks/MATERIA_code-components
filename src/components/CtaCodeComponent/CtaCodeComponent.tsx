@@ -87,7 +87,7 @@ export const CtaCodeComponent = ({
             {title.split('').map((char, i) => (
               <span
                 key={`top-${i}`}
-                className={`char-top font-['Helveticaneue'] text-[12px] font-normal uppercase tracking-[0.02em] leading-none ${textColor} inline-block`}
+                className={`char-top font-['Helveticaneue'] text-[14px] font-normal uppercase tracking-[0.02em] leading-none ${textColor} inline-block`}
               >
                 {char === ' ' ? '\u00A0' : char}
               </span>
@@ -97,7 +97,7 @@ export const CtaCodeComponent = ({
             {title.split('').map((char, i) => (
               <span
                 key={`bottom-${i}`}
-                className={`char-bottom font-['Helveticaneue'] text-[12px] font-normal uppercase tracking-[0.02em] leading-none ${textColor} inline-block`}
+                className={`char-bottom font-['Helveticaneue'] text-[14px] font-normal uppercase tracking-[0.02em] leading-none ${textColor} inline-block`}
               >
                 {char === ' ' ? '\u00A0' : char}
               </span>
