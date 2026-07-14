@@ -24,7 +24,7 @@ describe('CtaCodeComponent', () => {
 
   it('renders with default black variant when no variant is provided', () => {
     const { container } = render(<CtaCodeComponent title="Test" />);
-    const boxes = container.querySelectorAll('.bg-\\[\\#0E0E0E\\]');
+    const boxes = container.querySelectorAll('.bg-\\[\\#353535\\]');
     expect(boxes.length).toBeGreaterThan(0);
   });
 
