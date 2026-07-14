@@ -38,8 +38,9 @@ export const CtaCodeComponent = ({
   title = 'Contacta ahora',
   variant = 'black',
 }: CtaCodeComponentProps) => {
+  //
   const isDark = variant === 'black';
-  const bg = isDark ? 'bg-[#0E0E0E]' : variant === 'white' ? 'bg-white' : 'bg-[#F2EEE9]';
+  const bg = isDark ? 'bg-[#353535]' : variant === 'white' ? 'bg-white' : 'bg-[#F2EEE9]';
   const textColor = isDark ? 'text-[#F2EEE9]' : 'text-[#0E0E0E]';
   const iconColor = isDark ? '#F2EEE9' : '#0E0E0E';
 
