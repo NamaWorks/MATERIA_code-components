@@ -25,11 +25,11 @@ const ArrowDownCircle = ({ isOpen }: { isOpen: boolean }) => (
     aria-hidden="true"
     className={`shrink-0 transition-transform duration-[var(--anim-duration)] ease-[var(--anim-ease)] ${isOpen ? 'rotate-180' : 'rotate-0'}`}
   >
-    <circle cx="7" cy="7" r="6.5" stroke="#0e0e0e" strokeWidth="1" />
-    <line x1="7" y1="4" x2="7" y2="10" stroke="#0e0e0e" strokeWidth="1" strokeLinecap="round" />
+    <circle cx="7" cy="7" r="6.5" stroke="#353535" strokeWidth="1" />
+    <line x1="7" y1="4" x2="7" y2="10" stroke="#353535" strokeWidth="1" strokeLinecap="round" />
     <path
       d="M5 8L7 10L9 8"
-      stroke="#0e0e0e"
+      stroke="#353535"
       strokeWidth="1"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -45,16 +45,19 @@ export const DropdownItem = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full border-b border-[#0e0e0e]">
+    <div
+      className="w-full border-b border-[#353535]"
+      style={{ borderBottom: '1px solid ', borderColor: '#353535' }}
+    >
       <div
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         className="grid grid-cols-[auto_1fr_auto] items-end gap-x-5 pb-[10px] cursor-pointer"
       >
-        <span className="font-['Helveticaneue'] text-[12px] font-normal uppercase leading-[1.2] text-[#0e0e0e]">
+        <span className="font-['Helveticaneue'] text-[12px] font-normal uppercase leading-[1.2] text-[#353535]">
           {index}
         </span>
-        <span className="font-['Helveticaneue'] text-[16px] font-normal uppercase leading-[1.2] text-[#0e0e0e]">
+        <span className="font-['Helveticaneue'] text-[16px] font-normal uppercase leading-[1.2] text-[#353535]">
           {label}
         </span>
         <ArrowDownCircle isOpen={isOpen} />
@@ -70,7 +73,7 @@ export const DropdownItem = ({
           className={`grid transition-[grid-template-rows] duration-[var(--anim-duration)] ease-[var(--anim-ease)] ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
         >
           <div className="overflow-hidden">
-            <div className="font-['Helveticaneue'] text-[16px] font-normal leading-[1.2] text-[#0e0e0e] pt-[10px] pb-[10px] [&_p]:mb-[0.75em] [&_p:last-child]:mb-0 normal-case">
+            <div className="font-['Helveticaneue'] text-[16px] font-normal leading-[1.2] text-[#353535] pt-[10px] pb-[10px] [&_p]:mb-[0.75em] [&_p:last-child]:mb-0 normal-case">
               {description}
             </div>
           </div>
