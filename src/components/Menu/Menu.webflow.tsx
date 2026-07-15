@@ -53,5 +53,6 @@ export default declareComponent(Menu, {
     navOpacity: props.Number({ name: 'Nav Opacity', defaultValue: 90 }),
     proyectosContent: props.Slot({ name: 'Proyectos Content' }),
     productosContent: props.Slot({ name: 'Productos Content' }),
+    navMaxWidth: props.Number({ name: 'navMaxWidth', defaultValue: 1512 }),
   },
 });
