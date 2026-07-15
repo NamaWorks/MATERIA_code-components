@@ -7,6 +7,7 @@ export interface MenuProps {
   navColor?: string;
   proyectosContent?: ReactNode;
   productosContent?: ReactNode;
+  navMaxWidth?: number;
 }
 
 export const Menu = ({
@@ -16,6 +17,7 @@ export const Menu = ({
   navColor = '#0e0e0e',
   proyectosContent,
   productosContent,
+  navMaxWidth = 1512,
 }: MenuProps) => {
   const [openDropdown, setOpenDropdown] = useState<'products' | 'projects' | null>(null);
   const openRef = useRef<'products' | 'projects' | null>(null);
@@ -25,6 +27,12 @@ export const Menu = ({
   const navRef = useRef<HTMLElement>(null);
   const proyectasWrapperRef = useRef<HTMLDivElement>(null);
   const productosWrapperRef = useRef<HTMLDivElement>(null);
+
+  const backdropBackground = navColor.startsWith('#')
+    ? `${navColor}${Math.round((navOpacity / 100) * 255)
+        .toString(16)
+        .padStart(2, '0')}`
+    : navColor;
 
   useEffect(() => {
     const navLinksEl = navLinksRef.current;
@@ -77,11 +85,25 @@ export const Menu = ({
   }, []);
 
   return (
-    <nav ref={navRef} className="absolute top-0 left-0 w-full z-50">
+    <nav
+      ref={navRef}
+      className="absolute top-0 left-0 w-full z-50 flex items-center justify-center self-center overflow-visible"
+    >
+      {/* Background for the elements */}
+      <div
+        className="absolute inset-0 h-full w-[100dvw] pointer-events-none"
+        style={{
+          backgroundColor: backdropBackground,
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          zIndex: 1,
+        }}
+      ></div>
       {/* Navbar bar */}
       <div
-        className={`w-full bg-[${navColor}]/${navOpacity}  backdrop-blur-[10px] flex items-center justify-between px-[10px] pt-[8px] pb-[6px]`}
-        style={{ backgroundColor: `${navColor}`, opacity: `${navOpacity / 100}` }}
+        id="navbar__navigation"
+        className="relative z-[2] flex w-full items-center justify-between px-[10px] pt-[8px] pb-[6px]"
+        style={{ maxWidth: `${navMaxWidth}px` }}
       >
         <div>{logo}</div>
         <div ref={navLinksRef} className="flex items-center gap-[60px]">

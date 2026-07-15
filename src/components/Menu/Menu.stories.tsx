@@ -184,6 +184,7 @@ export const Default: Story = {
   args: {
     logo: mockLogo,
     navLinks: mockNavLinks,
+    navMaxWidth: 700,
   },
 };
 
