@@ -28,6 +28,13 @@ export const Menu = ({
   const proyectasWrapperRef = useRef<HTMLDivElement>(null);
   const productosWrapperRef = useRef<HTMLDivElement>(null);
 
+  const backdropBackground =
+    navColor.startsWith('#')
+      ? `${navColor}${Math.round((navOpacity / 100) * 255)
+          .toString(16)
+          .padStart(2, '0')}`
+      : navColor;
+
   useEffect(() => {
     const navLinksEl = navLinksRef.current;
     const navEl = navRef.current;
@@ -85,13 +92,18 @@ export const Menu = ({
     >
       {/* Background for the elements */}
       <div
-        className={`absolute w-[100dvw] h-full backdrop-blur-[10px] z-1`}
-        style={{ backgroundColor: `${navColor}`, opacity: `${navOpacity / 100}` }}
+        className="absolute inset-0 h-full w-[100dvw] pointer-events-none"
+        style={{
+          backgroundColor: backdropBackground,
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          zIndex: 1,
+        }}
       ></div>
       {/* Navbar bar */}
       <div
         id="navbar__navigation"
-        className={`w-full bg-[${navColor}]/${navOpacity} max-w-[${navMaxWidth}]  flex items-center justify-between px-[10px] pt-[8px] pb-[6px] z-2`}
+        className="relative z-[2] flex w-full items-center justify-between px-[10px] pt-[8px] pb-[6px]"
         style={{ maxWidth: `${navMaxWidth}px` }}
       >
         <div>{logo}</div>
