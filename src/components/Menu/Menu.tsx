@@ -28,12 +28,11 @@ export const Menu = ({
   const proyectasWrapperRef = useRef<HTMLDivElement>(null);
   const productosWrapperRef = useRef<HTMLDivElement>(null);
 
-  const backdropBackground =
-    navColor.startsWith('#')
-      ? `${navColor}${Math.round((navOpacity / 100) * 255)
-          .toString(16)
-          .padStart(2, '0')}`
-      : navColor;
+  const backdropBackground = navColor.startsWith('#')
+    ? `${navColor}${Math.round((navOpacity / 100) * 255)
+        .toString(16)
+        .padStart(2, '0')}`
+    : navColor;
 
   useEffect(() => {
     const navLinksEl = navLinksRef.current;
