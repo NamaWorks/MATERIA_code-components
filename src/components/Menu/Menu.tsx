@@ -7,6 +7,7 @@ export interface MenuProps {
   navColor?: string;
   proyectosContent?: ReactNode;
   productosContent?: ReactNode;
+  navMaxWidth?: number;
 }
 
 export const Menu = ({
@@ -16,6 +17,7 @@ export const Menu = ({
   navColor = '#0e0e0e',
   proyectosContent,
   productosContent,
+  navMaxWidth = 1512,
 }: MenuProps) => {
   const [openDropdown, setOpenDropdown] = useState<'products' | 'projects' | null>(null);
   const openRef = useRef<'products' | 'projects' | null>(null);
@@ -77,11 +79,20 @@ export const Menu = ({
   }, []);
 
   return (
-    <nav ref={navRef} className="absolute top-0 left-0 w-full z-50">
+    <nav
+      ref={navRef}
+      className="absolute top-0 left-0 w-full z-50 flex items-center justify-center self-center overflow-visible"
+    >
+      {/* Background for the elements */}
+      <div
+        className={`absolute w-[100dvw] h-full backdrop-blur-[10px] z-1`}
+        style={{ backgroundColor: `${navColor}`, opacity: `${navOpacity / 100}` }}
+      ></div>
       {/* Navbar bar */}
       <div
-        className={`w-full bg-[${navColor}]/${navOpacity}  backdrop-blur-[10px] flex items-center justify-between px-[10px] pt-[8px] pb-[6px]`}
-        style={{ backgroundColor: `${navColor}`, opacity: `${navOpacity / 100}` }}
+        id="navbar__navigation"
+        className={`w-full bg-[${navColor}]/${navOpacity} max-w-[${navMaxWidth}]  flex items-center justify-between px-[10px] pt-[8px] pb-[6px] z-2`}
+        style={{ maxWidth: `${navMaxWidth}px` }}
       >
         <div>{logo}</div>
         <div ref={navLinksRef} className="flex items-center gap-[60px]">

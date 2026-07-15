@@ -50,13 +50,13 @@ describe('Menu', () => {
 
   it('applies default navColor and navOpacity to navbar bar', () => {
     const { container } = render(<Menu />);
-    const navBar = container.querySelector('nav > div');
+    const navBar = container.querySelector('nav > #navbar__navigation');
     expect(navBar?.className).toContain('bg-[#0e0e0e]/90');
   });
 
   it('applies custom navColor and navOpacity to navbar bar', () => {
     const { container } = render(<Menu navColor="#ffffff" navOpacity={50} />);
-    const navBar = container.querySelector('nav > div');
+    const navBar = container.querySelector('nav > #navbar__navigation');
     expect(navBar?.className).toContain('bg-[#ffffff]/50');
   });
 
