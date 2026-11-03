@@ -53,12 +53,24 @@ const mockLogo = (
 
 const mockNavLinks = (
   <>
-    <div><NavbarLink label="NOSOTROS" href="#nosotros" /></div>
-    <div><NavbarLink label="PROYECTOS" href="#proyectos" dropdownData="projects" /></div>
-    <div><NavbarLink label="PRODUCTOS" href="#productos" dropdownData="products" /></div>
-    <div><NavbarLink label="PROFESIONALES" href="#profesionales" /></div>
-    <div><NavbarLink label="STOCK" href="#stock" /></div>
-    <div><NavbarLink label="CONTACTO" href="#contacto" /></div>
+    <div>
+      <NavbarLink label="NOSOTROS" href="#nosotros" />
+    </div>
+    <div>
+      <NavbarLink label="PROYECTOS" href="#proyectos" dropdownData="projects" />
+    </div>
+    <div>
+      <NavbarLink label="PRODUCTOS" href="#productos" dropdownData="products" />
+    </div>
+    <div>
+      <NavbarLink label="PROFESIONALES" href="#profesionales" />
+    </div>
+    <div>
+      <NavbarLink label="STOCK" href="#stock" />
+    </div>
+    <div>
+      <NavbarLink label="CONTACTO" href="#contacto" />
+    </div>
   </>
 );
 
