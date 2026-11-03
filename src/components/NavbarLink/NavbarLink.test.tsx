@@ -27,26 +27,25 @@ describe('NavbarLink', () => {
     expect(container.querySelector('[style*="invert"]')).toBeInTheDocument();
   });
 
-  it('switches to solid square indicator when parent has data-dropdown-open', async () => {
+  it('applies invert(1) filter when parent has data-dropdown-open', async () => {
     const { container } = render(<NavbarLink label="PRODUCTOS" dropdownData="products" />);
     const parent = container.querySelector('a')!.parentElement!;
     parent.setAttribute('data-dropdown-open', '');
     await waitFor(() => {
-      const indicator = container.querySelector('span[style]');
-      expect(indicator).toHaveStyle({ backgroundColor: '#F9F8F5' });
+      expect(container.querySelector('span[style*="invert(1)"]')).toBeInTheDocument();
     });
   });
 
-  it('reverts to plus indicator when data-dropdown-open is removed', async () => {
+  it('reverts to invert(0) filter when data-dropdown-open is removed', async () => {
     const { container } = render(<NavbarLink label="PRODUCTOS" dropdownData="products" />);
     const parent = container.querySelector('a')!.parentElement!;
     parent.setAttribute('data-dropdown-open', '');
     await waitFor(() => {
-      expect(container.querySelector('span[style]')).toHaveStyle({ backgroundColor: '#F9F8F5' });
+      expect(container.querySelector('span[style*="invert(1)"]')).toBeInTheDocument();
     });
     parent.removeAttribute('data-dropdown-open');
     await waitFor(() => {
-      expect(container.querySelector('span[style]')).toHaveStyle({ backgroundColor: '#0e0e0e' });
+      expect(container.querySelector('span[style*="invert(0)"]')).toBeInTheDocument();
     });
   });
 });
