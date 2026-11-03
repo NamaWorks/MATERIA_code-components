@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Menu } from './Menu';
+import { NavbarLink } from '../NavbarLink/NavbarLink';
 
 // ─── Mock logo ───────────────────────────────────────────────────────────────
 
@@ -46,33 +47,18 @@ const mockLogo = (
 );
 
 // ─── Mock nav links (simulates a Webflow Collection List) ─────────────────────
-// Items with dropdown-data (non-empty, non-"none") open the matching panel on hover
-// and automatically receive the indicator dot injected by Menu.
-// In Webflow this attribute is bound to a CMS Option field on the Collection Item.
-
-const navLinkStyle =
-  "font-['Helveticaneue'] text-[12px] font-normal text-white uppercase cursor-pointer";
+// Each NavbarLink is wrapped in a div to simulate the Webflow Collection Item —
+// NavbarLink sets dropdown-data on its parentElement, and Menu watches those
+// wrapper divs to sync the data-dropdown-open attribute back for the indicator.
 
 const mockNavLinks = (
   <>
-    <a href="#nosotros" className={navLinkStyle}>
-      NOSOTROS
-    </a>
-    <a href="#proyectos" className={navLinkStyle} {...{ 'dropdown-data': 'projects' }}>
-      PROYECTOS
-    </a>
-    <a href="#productos" className={navLinkStyle} {...{ 'dropdown-data': 'products' }}>
-      PRODUCTOS
-    </a>
-    <a href="#profesionales" className={navLinkStyle}>
-      PROFESIONALES
-    </a>
-    <a href="#stock" className={navLinkStyle}>
-      STOCK
-    </a>
-    <a href="#contacto" className={navLinkStyle}>
-      W&nbsp;&nbsp;CONTACTO
-    </a>
+    <div><NavbarLink label="NOSOTROS" href="#nosotros" /></div>
+    <div><NavbarLink label="PROYECTOS" href="#proyectos" dropdownData="projects" /></div>
+    <div><NavbarLink label="PRODUCTOS" href="#productos" dropdownData="products" /></div>
+    <div><NavbarLink label="PROFESIONALES" href="#profesionales" /></div>
+    <div><NavbarLink label="STOCK" href="#stock" /></div>
+    <div><NavbarLink label="CONTACTO" href="#contacto" /></div>
   </>
 );
 

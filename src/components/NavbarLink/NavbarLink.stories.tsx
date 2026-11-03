@@ -1,5 +1,18 @@
+import { useEffect, useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NavbarLink } from './NavbarLink';
+
+const OpenWrapper = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    ref.current?.setAttribute('data-dropdown-open', '');
+  }, []);
+  return (
+    <div ref={ref}>
+      <NavbarLink label="PRODUCTOS" href="#" dropdownData="products" />
+    </div>
+  );
+};
 
 const meta: Meta<typeof NavbarLink> = {
   title: 'Components/NavbarLink',
@@ -19,6 +32,10 @@ export const Default: Story = {
 
 export const WithIndicator: Story = {
   args: { label: 'PRODUCTOS', href: '#', dropdownData: 'products' },
+};
+
+export const WithIndicatorOpen: Story = {
+  render: () => <OpenWrapper />,
 };
 
 export const AllLinks: Story = {

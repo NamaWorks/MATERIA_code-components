@@ -36,6 +36,20 @@ export const Menu = ({
 
   useEffect(() => {
     const navLinksEl = navLinksRef.current;
+    if (!navLinksEl) return;
+    navLinksEl.querySelectorAll<HTMLElement>('[dropdown-data]').forEach((el) => {
+      const matches =
+        openDropdown && el.getAttribute('dropdown-data')?.toLowerCase() === openDropdown;
+      if (matches) {
+        el.setAttribute('data-dropdown-open', '');
+      } else {
+        el.removeAttribute('data-dropdown-open');
+      }
+    });
+  }, [openDropdown]);
+
+  useEffect(() => {
+    const navLinksEl = navLinksRef.current;
     const navEl = navRef.current;
     if (!navLinksEl || !navEl) return;
 

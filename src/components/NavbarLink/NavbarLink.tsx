@@ -10,6 +10,7 @@ const hasDropdown = (val?: string) => !!val && val.toLowerCase() !== 'none';
 
 export const NavbarLink = ({ label = 'LINK', href = '#', dropdownData }: NavbarLinkProps) => {
   const [hovered, setHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const showIndicator = hasDropdown(dropdownData);
   const linkRef = useRef<HTMLAnchorElement>(null);
 
@@ -21,6 +22,16 @@ export const NavbarLink = ({ label = 'LINK', href = '#', dropdownData }: NavbarL
       parent.removeAttribute('dropdown-data');
     };
   }, [showIndicator, dropdownData]);
+
+  useEffect(() => {
+    const parent = linkRef.current?.parentElement;
+    if (!parent || !showIndicator) return;
+    const sync = () => setIsOpen(parent.hasAttribute('data-dropdown-open'));
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(parent, { attributes: true, attributeFilter: ['data-dropdown-open'] });
+    return () => observer.disconnect();
+  }, [showIndicator]);
 
   return (
     <a
@@ -34,25 +45,39 @@ export const NavbarLink = ({ label = 'LINK', href = '#', dropdownData }: NavbarL
       {showIndicator && (
         <span
           style={{
+            position: 'relative',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             width: '11px',
             height: '11px',
             borderRadius: '1.3px',
-            backgroundColor: '#F9F8F5',
+            backgroundColor: '#0e0e0e',
             flexShrink: 0,
-            filter: hovered ? 'invert(0)' : 'invert(1)',
+            filter: isOpen || hovered ? 'invert(1)' : 'invert(0)',
             transition: 'filter 300ms ease-out',
           }}
         >
+          {!isOpen && (
+            <span
+              style={{
+                position: 'absolute',
+                left: '5px',
+                top: '2.1px',
+                width: '1px',
+                height: '6.8px',
+                backgroundColor: '#F9F8F5',
+              }}
+            />
+          )}
           <span
             style={{
-              display: 'block',
-              width: '4.4px',
-              height: '4.4px',
-              borderRadius: '50%',
-              backgroundColor: '#0e0e0e',
+              position: 'absolute',
+              left: '2.1px',
+              top: '5px',
+              width: '6.8px',
+              height: '1px',
+              backgroundColor: '#F9F8F5',
             }}
           />
         </span>
