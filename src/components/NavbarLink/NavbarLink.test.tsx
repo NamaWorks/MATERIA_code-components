@@ -1,5 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { NavbarLink } from './NavbarLink';
+import { DropdownContext } from '../Menu/DropdownContext';
 
 describe('NavbarLink', () => {
   it('renders the label', () => {
@@ -27,25 +28,21 @@ describe('NavbarLink', () => {
     expect(container.querySelector('[style*="invert"]')).toBeInTheDocument();
   });
 
-  it('applies invert(1) filter when parent has data-dropdown-open', async () => {
-    const { container } = render(<NavbarLink label="PRODUCTOS" dropdownData="products" />);
-    const parent = container.querySelector('a')!.parentElement!;
-    parent.setAttribute('data-dropdown-open', '');
-    await waitFor(() => {
-      expect(container.querySelector('span[style*="invert(1)"]')).toBeInTheDocument();
-    });
+  it('applies invert(1) filter when dropdown context matches', () => {
+    const { container } = render(
+      <DropdownContext.Provider value="products">
+        <NavbarLink label="PRODUCTOS" dropdownData="products" />
+      </DropdownContext.Provider>
+    );
+    expect(container.querySelector('span[style*="invert(1)"]')).toBeInTheDocument();
   });
 
-  it('reverts to invert(0) filter when data-dropdown-open is removed', async () => {
-    const { container } = render(<NavbarLink label="PRODUCTOS" dropdownData="products" />);
-    const parent = container.querySelector('a')!.parentElement!;
-    parent.setAttribute('data-dropdown-open', '');
-    await waitFor(() => {
-      expect(container.querySelector('span[style*="invert(1)"]')).toBeInTheDocument();
-    });
-    parent.removeAttribute('data-dropdown-open');
-    await waitFor(() => {
-      expect(container.querySelector('span[style*="invert(0)"]')).toBeInTheDocument();
-    });
+  it('reverts to invert(0) filter when dropdown context does not match', () => {
+    const { container } = render(
+      <DropdownContext.Provider value={null}>
+        <NavbarLink label="PRODUCTOS" dropdownData="products" />
+      </DropdownContext.Provider>
+    );
+    expect(container.querySelector('span[style*="invert(0)"]')).toBeInTheDocument();
   });
 });
