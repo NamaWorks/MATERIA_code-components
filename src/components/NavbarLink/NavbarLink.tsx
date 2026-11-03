@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
+import { DropdownContext } from '../Menu/DropdownContext';
 
 export interface NavbarLinkProps {
   label?: string;
@@ -10,9 +11,21 @@ const hasDropdown = (val?: string) => !!val && val.toLowerCase() !== 'none';
 
 export const NavbarLink = ({ label = 'LINK', href = '#', dropdownData }: NavbarLinkProps) => {
   const [hovered, setHovered] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const showIndicator = hasDropdown(dropdownData);
   const linkRef = useRef<HTMLAnchorElement>(null);
+  const contextDropdown = useContext(DropdownContext);
+  const [eventDropdown, setEventDropdown] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      setEventDropdown((e as CustomEvent<string | null>).detail);
+    };
+    document.addEventListener('materia:dropdown-change', handler);
+    return () => document.removeEventListener('materia:dropdown-change', handler);
+  }, []);
+
+  const openDropdown = contextDropdown !== null ? contextDropdown : eventDropdown;
+  const isOpen = !!openDropdown && showIndicator && openDropdown === dropdownData?.toLowerCase();
 
   useEffect(() => {
     const parent = linkRef.current?.parentElement;
@@ -22,16 +35,6 @@ export const NavbarLink = ({ label = 'LINK', href = '#', dropdownData }: NavbarL
       parent.removeAttribute('dropdown-data');
     };
   }, [showIndicator, dropdownData]);
-
-  useEffect(() => {
-    const parent = linkRef.current?.parentElement;
-    if (!parent || !showIndicator) return;
-    const sync = () => setIsOpen(parent.hasAttribute('data-dropdown-open'));
-    sync();
-    const observer = new MutationObserver(sync);
-    observer.observe(parent, { attributes: true, attributeFilter: ['data-dropdown-open'] });
-    return () => observer.disconnect();
-  }, [showIndicator]);
 
   return (
     <a

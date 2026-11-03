@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, ReactNode } from 'react';
+import { DropdownContext } from './DropdownContext';
 
 export interface MenuProps {
   logo?: ReactNode;
@@ -36,26 +37,15 @@ export const Menu = ({
 
   useEffect(() => {
     const navLinksEl = navLinksRef.current;
-    if (!navLinksEl) return;
-    navLinksEl.querySelectorAll<HTMLElement>('[dropdown-data]').forEach((el) => {
-      const matches =
-        openDropdown && el.getAttribute('dropdown-data')?.toLowerCase() === openDropdown;
-      if (matches) {
-        el.setAttribute('data-dropdown-open', '');
-      } else {
-        el.removeAttribute('data-dropdown-open');
-      }
-    });
-  }, [openDropdown]);
-
-  useEffect(() => {
-    const navLinksEl = navLinksRef.current;
     const navEl = navRef.current;
     if (!navLinksEl || !navEl) return;
 
     const open = (val: 'products' | 'projects' | null) => {
       openRef.current = val;
       setOpenDropdown(val);
+      document.dispatchEvent(
+        new CustomEvent('materia:dropdown-change', { detail: val, bubbles: false })
+      );
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -120,9 +110,11 @@ export const Menu = ({
         style={{ maxWidth: `${navMaxWidth}px` }}
       >
         <div>{logo}</div>
-        <div ref={navLinksRef} className="flex items-center gap-[60px]">
-          {navLinks}
-        </div>
+        <DropdownContext.Provider value={openDropdown}>
+          <div ref={navLinksRef} className="flex items-center gap-[60px]">
+            {navLinks}
+          </div>
+        </DropdownContext.Provider>
       </div>
 
       {/* Dropdown panels — absolute, overlays page content below the navbar bar */}
